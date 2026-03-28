@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
-import Request_password from "./pages/auth/request_password";
-import Register from "./pages/auth/register";
-import Login from "./pages/auth/login";
-import Email from "./pages/auth/email";
+import Request_password from "./pages/auth/Request_password";
+import Register from "./pages/auth/Register";
+import NotFound from "./pages/NotFound";
+import Login from "./pages/auth/Login";
+import Email from "./pages/auth/Email";
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/request-password" element={<Request_password />}/>
         <Route path="/email-verification" element={<Email />}/>
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
