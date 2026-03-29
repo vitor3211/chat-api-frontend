@@ -5,11 +5,13 @@ import Register from "./pages/auth/Register";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
 import Email from "./pages/auth/Email";
+import Chat from "./pages/Chat"
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/chat" element={<Chat />}/>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
