@@ -1,49 +1,44 @@
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FaEyeSlash } from "react-icons/fa6";
-import { IoEyeSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import { useState } from "react";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import FormHeader from "../../components/FormHeader";
+import AuthLayout from "../../components/AuthLayout";
 
 const Register = () => {
     
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-sky-700 via-sky-900 to-slate-900 ">
-                <form className="flex flex-col min-w-[400px] min-h-[375px] 
-                justify-center px-8 py-7 bg-white rounded-xl gap-3 shadow-lg">
-                  <div className="flex justify-center items-center py-6 -mx-8 -mt-13 rounded-t-xl bg-sky-600">
-                    <h2 className="text-2xl font-bold text-white">Create your account</h2>
-                  </div>
-                  <label htmlFor="username" className="text-sm font-medium text-slate-700">Username</label>
-                  <div className="relative flex items-center">
-                    <span className="absolute left-3 text-slate-600"><FaUser/></span>
-                    <input type="text" id="username" placeholder="Username..." min={6} max={80} className="rounded-md pl-8 px-3 py-2 pr-5 w-full border border-slate-300 
-                    hover:ring-1 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent 
-                    transition"/>
-                  </div>
-                  <label htmlFor="email" className="text-sm font-medium text-slate-700">Email</label>
-                  <div className="relative flex items-center">
-                    <span className="absolute left-3 text-slate-600">
-                      <MdEmail/>
-                    </span>
-                    <input type="email" id="email" placeholder="user@email.com..." min={6} max={80} className="rounded-md pl-8 px-3 py-2 pr-5 w-full border border-slate-300 
-                    hover:ring-1 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent 
-                    transition"/>
-                  </div>
-                  <label htmlFor="password" className="text-sm font-medium text-slate-700">Password</label>
-                  <div className="relative flex items-center">
-                    <span className="absolute left-3 text-slate-600"><RiLockPasswordFill/></span>
-                    <input type={showPassword ? "text" : "password"} id="password" placeholder="Password..." className="rounded-md pl-8 px-3 py-2 pr-9 w-full border border-slate-300 
-                    hover:ring-1 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent 
-                    transition"/>
-                    <span onClick={() => setShowPassword((prev) => !prev)} className="absolute right-3 text-slate-600 cursor-pointer">
-                      {showPassword ? <IoEyeSharp/> : <FaEyeSlash/>}
-                    </span>
-                  </div>
-                  <button className="bg-sky-600 text-white cursor-pointer font-semibold rounded-lg mt-5 py-3 
-                  hover:bg-sky-700 active:scale-95 transition">Sign Up</button>
+        <AuthLayout
+          footerLinks={<a href="/login" className="text-white hover:text-white transition-colors duration-300 underline-offset-4 hover:underline">Already have an account? Sign in</a>}
+        >
+                  <FormHeader title="Create your account"/>
+                  <Input 
+                    label="Username" 
+                    icon={FaUser} 
+                    type="text" 
+                    placeholder="Username..." 
+                    required 
+                  />
+                  <Input 
+                    label="Email Address" 
+                    icon={MdEmail} 
+                    type="email" 
+                    placeholder="user@email.com" 
+                    required 
+                  />
+                  <Input 
+                    label="Password" 
+                    icon={RiLockPasswordFill} 
+                    type="password" 
+                    placeholder="••••••••" 
+                    required 
+                  />
+                  <Button 
+                    text="Sign Up" 
+                    type="submit" 
+                    loading={false} 
+                  />
                   <div className="flex items-center my-6">
                   <div className="flex-1 border-t border-slate-300"></div>
                   <span className="px-3 text-slate-500 text-sm font-medium">or try with</span>
@@ -61,9 +56,7 @@ const Register = () => {
                     <span className="text-slate-100">Google</span>
                 </a>
                 </div>
-                </form>
-                <a href="/login" className="text-white hover:text-white transition-colors duration-300 underline-offset-4 hover:underline">Already have an account? Sign in</a>
-              </div>
+        </AuthLayout>
     );
 }
 
