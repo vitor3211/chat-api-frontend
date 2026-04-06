@@ -4,7 +4,7 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { IoEyeSharp } from "react-icons/io5";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label: string;
+    label?: string;
     variant?: "primary" | "secondary" 
     iconVariant?: "primary" | "secondary"
     icon?: IconType;
