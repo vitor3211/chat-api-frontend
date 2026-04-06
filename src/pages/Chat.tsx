@@ -70,7 +70,7 @@ const MainChat = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            //navigate("/login");
+            navigate("/login");
             return;
         }
 
