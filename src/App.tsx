@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
-import Request_password from "./pages/auth/Request_password";
+import Request_password from "./pages/auth/RequestPassword";
 import ChangePassword from "./pages/auth/ChangePassword";
 import Register from "./pages/auth/Register";
 import NotFound from "./pages/NotFound";

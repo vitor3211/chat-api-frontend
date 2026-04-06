@@ -59,7 +59,45 @@ const Register = () => {
                 autoClose: 3000
             });
       }
-    }
+    };
+
+    const googleSignUp = () => {
+    const w = 600;
+    const h = 600;
+    const left = window.screen.width / 2 - w / 2;
+    const topPos = window.screen.height / 2 - h / 2;
+
+    const backendURL = import.meta.env.VITE_API_URL;
+
+    const authWindow: Window | null = window.open(
+        `${backendURL}/oauth2/authorization/google`,
+        "GoogleLogin",
+        `width=${w},height=${h},top=${topPos},left=${left},resizable=yes,scrollbars=yes`
+    );
+
+    const messageListener = (event: MessageEvent) => {
+        if (event.origin !== backendURL) return;
+
+        const { token, refreshToken, expiresIn } = event.data as {
+            token?: string;
+            refreshToken?: string;
+            expiresIn?: string;
+        };
+
+        if (token) {
+            localStorage.clear();
+            localStorage.setItem("token", token);
+            if (refreshToken) localStorage.setItem("refreshToken", refreshToken);
+            if (expiresIn) localStorage.setItem("expiresIn", expiresIn);
+
+            window.removeEventListener("message", messageListener);
+            if (authWindow) authWindow.close();
+            navigate("/home");
+        }
+    };
+
+      window.addEventListener("message", messageListener);
+  };
 
     return (
         <AuthLayout
@@ -105,7 +143,7 @@ const Register = () => {
           <div className="flex-1 border-t border-slate-300"></div>
           </div>
             <div className="flex justify-center">
-                <a href="#" className="flex flex-row justify-center items-center border gap-3 bg-slate-800 w-full rounded-lg p-1 hover:bg-slate-900 transition-all ease-in-out duration-300">
+                <button onClick={googleSignUp} className="flex flex-row justify-center items-center border gap-3 bg-slate-800 w-full rounded-lg p-1 hover:bg-slate-900 transition-all ease-in-out duration-300">
                 <div>
                     <img 
                     src="https://www.gstatic.com/images/branding/product/2x/googleg_64dp.png" 
@@ -114,7 +152,7 @@ const Register = () => {
                     />
                 </div>
                 <span className="text-slate-100">Google</span>
-            </a>
+            </button>
           </div>
         </form>
         </AuthLayout>
